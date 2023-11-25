@@ -3,122 +3,111 @@
 {% load fegt9_mpg_proteksaun_url %}
 
 		<!-- ============================================================== -->
-		<!-- pageheader  -->
-		<!-- ============================================================== -->
-		<div class="row">
-			<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-				<div class="page-header">
-					<h2 class="pageheader-title">My Task </h2>
-					<p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
-					<div class="page-breadcrumb">
-						<nav aria-label="breadcrumb">
-							<ol class="breadcrumb">
-								<li class="breadcrumb-item"><a href="#" class="breadcrumb-link">CVTL</a></li>
-								<li class="breadcrumb-item active" aria-current="page">Hris Painel</li>
-							</ol>							
-						</nav>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- ============================================================== -->
-		<!-- end pageheader  -->
-		<!-- ============================================================== -->
-		<div class="ecommerce-widget">
-			<div class="row">
-				<!-- ============================================================== -->
-								<!-- recent orders  -->
-				<!-- ============================================================== -->
-				<div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
-					<div class="card">
-						<div class="card-body p-0">
-							<div class="table-responsive">
-								<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
-									<div class="tab-vertical">
-										<ul class="nav nav-tabs" id="myTab3" role="tablist">
-											<li class="nav-item">
-												<a class="nav-link {{tab_purchase_request}}" href="{% url 'mytask:mytasktab' 'purchase_request' %}" role="tab" aria-controls="home" aria-selected="true">Purchace Request</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link {{tab_leave}}"  href="{% url 'mytask:mytasktab' 'leave' %}" role="tab" aria-controls="profile" aria-selected="false">Leave Request</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link"  href="" role="tab" aria-controls="profile" aria-selected="false">Conf Medical Aprove</a>
-											</li>
-											<li class="nav-item">
-												<a class="nav-link {{tab_travel}}"  href="{% url 'mytask:mytasktab' 'travel' %}" role="tab" aria-controls="profile" aria-selected="false">Trip Request</a>
-											</li>
-										</ul>
-										<div class="tab-content" id="myTabContent3">
-											<div class="tab-pane fade show active" id="home-vertical" role="tabpanel" aria-labelledby="home-vertical-tab">
-												{% if tab %}												
-												<!-- basic pills  -->
-												<!-- ============================================================== -->
-												<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb-5">
-													<div class="section-block">
-														<h5 class="section-title">{{tab}}</h5>
-														<p>See the request for you here.</p>
-													</div>
-													<div class="pills-regular">
-														<ul class="nav nav-pills mb-1" id="pills-tab" role="tablist">
-															<li class="nav-item">
-																<a class="nav-link {{pill_tab_pending}}" href="{% url 'mytask:mytaskpilltab' tab 'pending' %}" role="tab" aria-controls="home" aria-selected="true">Pending</a>
-															</li>
-															<li class="nav-item">
-																<a class="nav-link {{pill_tab_aproved}}" href="{% url 'mytask:mytaskpilltab' tab 'aproved' %}" role="tab" aria-controls="home" aria-selected="true">Aproved</a>
-															</li>
-															<li class="nav-item">
-																<a class="nav-link {{pill_tab_rejected}}" href="{% url 'mytask:mytaskpilltab' tab 'rejected' %}" role="tab" aria-controls="home" aria-selected="true">Rejected</a>
-															</li>
-														</ul>
-														<div class="tab-content" id="pills-tabContent">
-															<table class="table table-sm">
-																<thead class="bg-light">
-																	<tr class="border-0">
-																		<th class="border-0">Nu</th>
-																		<th class="border-0">Request</th>
-																	</tr>
-																</thead>
-																<tbody>
-																	{% if dados %}
-																		{% for data in dados %}
-																		<tr>
-																			<td>{{forloop.counter}}</td>
-																			<td>
-																				{% if tab == 'leave' %}
-																				<a href="{% url 'leave:detalluleaverequest' data.leaverequest.id|encrypt_id_tag%}">
-																					You have {{pill_tab}} request from Mr./Ms. {{data.leaverequest.contract}} with details: {{data.leaverequest.leavetype}} from {{data.leaverequest.start_date}} to {{data.leaverequest.end_date}}
-																				</a>
-																				{% elif tab == 'travel' %}
-																				<a href="{% url 'travel:detallutravelrequest' data.travelautorization.id|encrypt_id_tag%}">
-																					You have {{pill_tab}} request from Mr./Ms. {{data.travelautorization.contract}} with details: {{data.travelautorization.purpose_of_travel}} from {{data.travelautorization.departure_date}} to {{data.travelautorization.return_date}}
-																				</a>
-																				{% endif %}
-																			</td>
-																		</tr>
-																		{% endfor %}
-																	{% else %}
-																		<tr>
-																			<td colspan="2" align="center">No {{tab}} {{pill_tab}}</td>
-																		</tr>
-																	{% endif %}
-																</tbody>
-															</table>
-														</div>
-													</div>
-												</div>
-												<!-- ============================================================== -->
-												<!-- end basic pills  -->
-												{% endif %}
-											</div>
-										</div>
+						<!-- pageheader  -->
+						<!-- ============================================================== -->
+						<div class="row">
+							<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+								<div class="page-header">
+									<h2 class="pageheader-title">My Task </h2>
+									<p class="pageheader-text">Nulla euismod urna eros, sit amet scelerisque torton lectus vel mauris facilisis faucibus at enim quis massa lobortis rutrum.</p>
+									<div class="page-breadcrumb">
+										<nav aria-label="breadcrumb">
+											<ol class="breadcrumb">
+												<li class="breadcrumb-item"><a href="#" class="breadcrumb-link">CVTL</a></li>
+												<li class="breadcrumb-item active" aria-current="page">Hris Painel</li>
+											</ol>
+
+                                            
+										</nav>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+						<!-- ============================================================== -->
+						<!-- end pageheader  -->
+						<!-- ============================================================== -->
+						<div class="ecommerce-widget">
+	
+				
+							<div class="row">
+								<!-- ============================================================== -->
+						  
+								<!-- ============================================================== -->
+	
+											  <!-- recent orders  -->
+								<!-- ============================================================== -->
+
+								
+					<br>					
+
+								<div class="col-xl-12 col-lg-12 col-md-6 col-sm-12 col-12">
+								
+									<div class="card">
+									
+                                     
+										<div class="card-body p-0">
+
+										<div class="tab-outline">
+
+
+
+                                <ul class="nav nav-tabs" id="myTab2" role="tablist">
+                                    <li class="nav-item ">
+                                        <a href="{% url 'mytask:leavestatus' 'Pending'%}" class="nav-link {{tab_leavestatus}}" id="tab-outline-one" data-toggle="tab" href="#outline-one" role="tab" aria-controls="home" aria-selected="false">Leave</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a href="{% url 'mytask:travelstatus' 'Pending'%}" class="nav-link {{tab_travelstatus}}  " id="tab-outline-two" data-toggle="tab" href="#outline-two" role="tab" aria-controls="profile" aria-selected="true">Trip</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a href="" class="nav-link {{tab_purchase}} " id="tab-outline-two" data-toggle="tab" href="#outline-two" role="tab" aria-controls="profile" aria-selected="true">Purchase</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a href="" class="nav-link {{tab_medical}} " id="tab-outline-two" data-toggle="tab" href="#outline-two" role="tab" aria-controls="profile" aria-selected="true">Medical</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a href="" class="nav-link {{tab_performance}} " id="tab-outline-two" data-toggle="tab" href="#outline-two" role="tab" aria-controls="profile" aria-selected="true">Performance</a>
+                                    </li>
+                                    <li class="nav-item ">
+                                        <a href="" class="nav-link {{tab_recruitment}} " id="tab-outline-two" data-toggle="tab" href="#outline-two" role="tab" aria-controls="profile" aria-selected="true">Online Recruitment</a>
+                                    </li>
+                                 
+
+                                </ul>
+                                <div class="tab-content" id="myTabContent2">
+
+                                 
+
+                   		<div class="table-responsive">
+											{% if tab_leavestatus %}
+												{% include 'mytask/leave.html' %}
+                                            {% elif tab_travelstatus %}
+												{% include 'mytask/travel.html' %}
+											{% endif %}
+											</div>
+								
+
+     
+                                </div>
+                            </div>
+
+										</div>
+									</div>
+								</div>
+								<!-- ============================================================== -->
+								<!-- end recent orders  -->
+	
+		
+								<!-- ============================================================== -->
+								<!-- ============================================================== -->
+								<!-- customer acquistion  -->
+								<!-- ============================================================== -->
+							
+								<!-- ============================================================== -->
+								<!-- end customer acquistion  -->
+								<!-- ============================================================== -->
+							</div>
+				
+						
+						</div>
 
 {% endblock content %}

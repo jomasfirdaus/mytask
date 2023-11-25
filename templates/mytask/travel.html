@@ -1,0 +1,64 @@
+{% load fegt9_mpg_proteksaun_url %}
+    									<div class="tab-vertical">
+										<ul class="nav nav-tabs" id="myTab3" role="tablist">
+											<li class="nav-item">
+												<a class="nav-link {% if tabstatus == 'Pending' %} active {% endif %}" href="{% url 'mytask:travelstatus' 'Pending' %}" role="tab" aria-controls="home" aria-selected="true">Pending</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link {% if tabstatus == 'Approved' %} active {% endif %} " href="{% url 'mytask:travelstatus' 'Approved' %}" role="tab" aria-controls="home" aria-selected="true">Approved</a>
+											</li>
+											<li class="nav-item">
+												<a class="nav-link {% if tabstatus == 'Rejected' %} active {% endif %} " href="{% url 'mytask:travelstatus' 'Rejected' %}" role="tab" aria-controls="home" aria-selected="true">Rejected</a>
+											</li>
+										</ul>
+										<div class="tab-content" id="myTabContent3">
+											{{tabstatus}} Trip Request<hr>
+
+
+
+    <table class="table table-sm">
+													<thead class="bg-light">
+														<tr class="border-0">
+															<th class="border-0">Nu</th>
+															<th class="border-0">Project</th>
+															<th class="border-0">Naran</th>
+															<th class="border-0">Departure Place</th>
+															<th class="border-0">Departure Date</th>
+															<th class="border-0">Return Date</th>
+															<th class="border-0">Status</th>
+															<th class="border-0">Asaun</th>
+														</tr>
+													</thead>
+													<tbody>
+														{% if dados %}
+															{% for data in dados %}
+															<tr>
+																<td>{{forloop.counter}}</td>
+																<td>{{data.travelautorization.project_name}}</td>
+																<td>{{data.travelautorization.contract}}</td>
+																<td>{{data.travelautorization.place_of_departure}}</td>
+																<td>{{data.travelautorization.departure_date}}</td>
+																<td>{{data.travelautorization.return_date}}</td>
+																<td>{{tabstatus}}</td>
+																<td>
+																	<a href="{% url 'travel:detallutravelrequest' data.travelautorization.id|encrypt_id_tag%}" class="btn btn-success btn-sm" >
+																		<i class="fas fa-list"></i>
+																		{% if tabstatus == "Pending" %}
+																			Take Action
+																		{% else %}
+																			View
+																		{% endif %}
+																	</a>
+																</td>
+															</tr>
+															{% endfor %}
+														{% else %}
+															<tr>
+																<td colspan="8" align="center">You don't have {{tabstatus}} Trip Request.</td>
+															</tr>
+														{% endif %}
+													</tbody>
+												</table>
+
+                                                </div>
+                                                </div>

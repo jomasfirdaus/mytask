@@ -9,45 +9,45 @@ from travel.models import AproveTravelAutorization
 def listamytask(request):
     context = {
         "pajina_mytask" : "active",
-        # "dadosta": dadosta,
     }
     return render(request, 'mytask/mytask.html',context)
 
 
-def mytasktab(request,tab):
+def leavestatus(request,status):
+    status_request = None
+    if status == 'Pending':
+        status_request = "Review"
+    elif status == 'Approved':
+        status_request = "Acepted"
+    elif status == "Rejected":
+        status_request = "Rejected"
+
+    dados = RequestLeaveAprove.objects.filter(contract=request.contract, status=status_request)
+
     context = {
         "pajina_mytask" : "active",
-        "tab_"+str(tab): "active",
-        "tab" : tab,
-            }
+        "tab_leavestatus": "active",
+        "tabstatus" : status,
+        "dados": dados,
+    }
     return render(request, 'mytask/mytask.html',context)
 
 
-def mytaskpilltab(request,tab,status):
-    dados = None
-    
-    if tab == 'leave':
-        if status == 'pending':
-            dados = RequestLeaveAprove.objects.filter(contract=request.contract, status='Review')
-        elif status == 'aproved':
-            dados = RequestLeaveAprove.objects.filter(contract=request.contract, status='Acepted')
-        elif status == 'rejected':
-            dados = RequestLeaveAprove.objects.filter(contract=request.contract, status='Rejected')
-    
-    elif tab == 'travel':
-        if status == 'pending':
-            dados = AproveTravelAutorization.objects.filter(contract=request.contract, status='Review')
-        elif status == 'aproved':
-            dados = AproveTravelAutorization.objects.filter(contract=request.contract, status='Acepted')
-        elif status == 'rejected':
-            dados = AproveTravelAutorization.objects.filter(contract=request.contract, status='Rejected')
+def travelstatus(request,status):
+    status_request = None
+    if status == 'Pending':
+        status_request = "Review"
+    elif status == 'Approved':
+        status_request = "Acepted"
+    elif status == "Rejected":
+        status_request = "Rejected"
+
+    dados = AproveTravelAutorization.objects.filter(contract=request.contract, status=status_request)
 
     context = {
         "pajina_mytask" : "active",
-        "tab_"+str(tab): "active",
-        "tab" : tab,
-        "pill_tab_"+str(status): "active",
-        "pill_tab": status,
+        "tab_travelstatus": "active",
+        "tabstatus" : status,
         "dados": dados,
-            }
+    }
     return render(request, 'mytask/mytask.html',context)
