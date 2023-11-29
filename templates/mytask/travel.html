@@ -41,7 +41,7 @@
 																<td>{{data.travelautorization.return_date}}</td>
 																<td>{{tabstatus}}</td>
 																<td>
-																	<a href="{% url 'travel:detallutravelrequest' data.travelautorization.id|encrypt_id_tag%}" class="btn btn-success btn-sm" >
+																	<a href="{% url 'travel:detallutravelrequesttab' data.travelautorization.id|encrypt_id_tag 'Person' %}" class="btn btn-success btn-sm" >
 																		<i class="fas fa-list"></i>
 																		{% if tabstatus == "Pending" %}
 																			Take Action
